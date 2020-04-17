@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'src/widgets/form.dart';
 import 'src/widgets/imageLogin.dart';
-import 'src/Pages/Home.dart' show HomePage;
+import 'src/Pages/Home.dart';
 
 void main() => runApp(MyApp());
 
