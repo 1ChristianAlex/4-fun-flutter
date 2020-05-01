@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../classes/ReadJsonHeroes.dart';
+import '../classes/Heroes.dart' show Heroes;
+import '../widgets/listImageItem.dart' show ImageItemClicable;
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,28 +9,29 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final List<String> spiderManList = [''];
-  Map<String, String> jsonHeroJson;
-
+  List<Heroes> herosList = [];
   @override
   void initState() {
     super.initState();
     ReadJsonHeroes jsonHero = ReadJsonHeroes();
 
-    WidgetsBinding.instance.addPostFrameCallback((callback) => {
+    WidgetsBinding.instance.addPersistentFrameCallback((callback) => {
           jsonHero.loadJsonData().then((valueJson) => {
                 setState(() {
-                  jsonHeroJson = valueJson;
+                  herosList = valueJson;
                 })
               })
         });
   }
 
-  List<Widget> spiderText() {
-    List<Text> spiderText =
-        this.spiderManList.map((item) => Text('item.getName()')).toList();
+  List<ImageItemClicable> ImagemList() {
+    List<ImageItemClicable> imagemItemList = [];
 
-    return spiderText;
+    if (herosList.length > 0) {
+      herosList.forEach(
+          (hero) => {imagemItemList.add(ImageItemClicable(hero: hero))});
+    }
+    return imagemItemList;
   }
 
   @override
@@ -43,11 +46,7 @@ class HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(15),
               child: Row(children: <Widget>[
                 Column(
-                  children: <Widget>[
-                    Text(
-                      jsonHeroJson.toString(),
-                    )
-                  ],
+                  children: ImagemList(),
                 )
               ]))),
     );

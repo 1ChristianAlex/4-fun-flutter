@@ -31,9 +31,9 @@ class FormLoginState extends State<FormLogin> {
   }
 
   void submitLogin() {
-    if (this.password == '123456' && this.name == 'khrix') {
-      Navigator.pushNamed(context, '/HomeLoged');
-    }
+    // if (this.password == '123456' && this.name.trim() == 'khrix') {
+    Navigator.pushNamed(context, '/HomeLoged');
+    // }
   }
 
   Widget build(BuildContext context) {
